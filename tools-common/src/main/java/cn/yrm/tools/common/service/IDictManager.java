@@ -40,4 +40,12 @@ public interface IDictManager {
      * Excel字典转换数组
      */
     List<String> getDictConvertString(String dictCode);
+
+    /**
+     * 获取字典的显示值
+     * @param dictCode
+     * @param dictValue
+     * @return
+     */
+    String getDictText(String dictCode, String dictValue);
 }

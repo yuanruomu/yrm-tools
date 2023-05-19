@@ -7,10 +7,10 @@
     <groupId>io.github.yuanruomu</groupId>
     <artifactId>yrm-tools</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <!-- 下列三项是需要的 -->
-    <name>开发工具</name>
+    <name>yrm-tools</name>
     <description>开发工具架构</description>
     <url>https://github.com/yuanruomu</url>
 
@@ -18,7 +18,7 @@
     <scm>
         <connection>scm:git:ssh://git@github.com:yuanruomu/yrm-tools.git</connection>
         <developerConnection>scm:git:https://github.com/yuanruomu/yrm-tools.git</developerConnection>
-        <url>https://gitee.com/xuqiudong/vic-environment</url>
+        <url>https://github.com/yuanruomu/yrm-tools</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -54,7 +54,6 @@
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
     <modules>
         <module>tools-common</module>
         <module>tools-weixin</module>
@@ -72,7 +71,8 @@
         <mybatis.plus.version>3.4.3.4</mybatis.plus.version>
         <mybatis.spring.version>2.0.7</mybatis.spring.version>
         <easypoi.version>4.3.0</easypoi.version>
-        <self.version>1.0.0-SNAPSHOT</self.version>
+        <upy.sdk.version>4.0.1</upy.sdk.version>
+        <revision>1.0.1</revision>
     </properties>
 
     <dependencyManagement>
@@ -130,7 +130,13 @@
             <dependency>
                 <groupId>io.github.yuanruomu</groupId>
                 <artifactId>tools-common</artifactId>
-                <version>${self.version}</version>
+                <version>${revision}</version>
+            </dependency>
+            <!-- 又拍云SDK -->
+            <dependency>
+                <groupId>com.upyun</groupId>
+                <artifactId>java-sdk</artifactId>
+                <version>${upy.sdk.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -140,20 +146,29 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.10.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <!-- Javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -173,27 +188,16 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
             </plugin>
-            <!-- Javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <charset>UTF-8</charset>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
             </plugin>
             <!-- Gpg Signature -->
             <plugin>
@@ -206,6 +210,32 @@
                         <phase>verify</phase>
                         <goals>
                             <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 统一版本号管理 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.2.7</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
                         </goals>
                     </execution>
                 </executions>

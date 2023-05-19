@@ -70,6 +70,12 @@ public class Result<T> implements Serializable, CodeImpl {
         return r;
     }
 
+    public static Result success() {
+        Result r = new Result();
+        r.setSuccess(true);
+        return r;
+    }
+
     /**
      * 是否成功
      */
