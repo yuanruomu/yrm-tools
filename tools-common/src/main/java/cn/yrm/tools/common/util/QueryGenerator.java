@@ -49,7 +49,7 @@ public class QueryGenerator {
                 }
                 String fieldName = field.getName();
                 // 判断加入排序条件
-                if(orderMap.containsKey(fieldName)){
+                if (orderMap.containsKey(fieldName)) {
                     String orderType = orderMap.get(fieldName);
                     if (CommonConstant.ORDER_ASC.equalsIgnoreCase(orderType)) {
                         queryWrapper.orderByAsc(StrUtil.toUnderlineCase(fieldName));
@@ -59,13 +59,17 @@ public class QueryGenerator {
                 }
                 String fieldType = field.getDeclaringClass().getName();
                 // 添加 判断是否范围匹配
-                if (parameterMap != null && parameterMap.containsKey(fieldName + CommonConstant.RANGE_BEGIN)) {
-                    String beginValue = parameterMap.get(fieldName + CommonConstant.RANGE_BEGIN)[0].trim();
-                    addQueryCondition(queryWrapper, fieldName, fieldType, beginValue, QueryRuleEnum.GE);
-                }
-                if (parameterMap != null && parameterMap.containsKey(fieldName + CommonConstant.RANGE_END)) {
-                    String endValue = parameterMap.get(fieldName + CommonConstant.RANGE_END)[0].trim();
-                    addQueryCondition(queryWrapper, fieldName, fieldType, endValue, QueryRuleEnum.LE);
+                if (parameterMap != null && parameterMap.containsKey(fieldName + CommonConstant.RANGE_SUFFIX)) {
+                    String rangeValue = parameterMap.get(fieldName + CommonConstant.RANGE_SUFFIX)[0].trim();
+                    if (StrUtil.isNotBlank(rangeValue)) {
+                        String[] values = rangeValue.split(CommonConstant.SPLIT_CHAR);
+                        if (StrUtil.isNotBlank(values[0])) {
+                            addQueryCondition(queryWrapper, fieldName, fieldType, values[0], QueryRuleEnum.GE);
+                        }
+                        if (values.length > 1 && StrUtil.isNotBlank(values[1])) {
+                            addQueryCondition(queryWrapper, fieldName, fieldType, values[1], QueryRuleEnum.LE);
+                        }
+                    }
                 }
                 // 多值查询
                 if (parameterMap != null && parameterMap.containsKey(fieldName + CommonConstant.MULTI_SUFFIX)) {
@@ -105,7 +109,7 @@ public class QueryGenerator {
         if (StrUtil.isEmpty(orderStr)) {
             return orderMap;
         }
-        String[] orders = orderStr.split(CommonConstant.MULTI_SPLIT);
+        String[] orders = orderStr.split(CommonConstant.SPLIT_CHAR);
         for (String orderItem : orders) {
             String[] orderArr = orderItem.split(StrUtil.SPACE);
             if (orderArr.length == 2) {
@@ -138,7 +142,7 @@ public class QueryGenerator {
                 } else if (val.endsWith(CommonConstant.LIKE_STAR)) {
                     rule = QueryRuleEnum.RIGHT_LIKE;
                 }
-            } else if (val.contains(CommonConstant.MULTI_SPLIT)) {
+            } else if (val.contains(CommonConstant.SPLIT_CHAR)) {
                 rule = QueryRuleEnum.IN;
             }
         }
