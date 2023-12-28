@@ -4,6 +4,7 @@ package cn.yrm.tools.common.service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public interface IFileUploader {
 
@@ -41,4 +42,12 @@ public interface IFileUploader {
      * @return
      */
     String saveFile(String biz, byte[] fileBytes, String fileName);
+
+    /**
+     * 生成上传文件签名，然后Form直传
+     *
+     * @param filePath
+     * @return
+     */
+    HashMap<String, String> getSign(String filePath);
 }

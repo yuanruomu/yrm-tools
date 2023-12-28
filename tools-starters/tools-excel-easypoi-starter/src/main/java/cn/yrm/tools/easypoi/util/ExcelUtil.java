@@ -72,7 +72,7 @@ public class ExcelUtil {
                 if (dictMap.containsKey(key)) {
                     // 需要处理字典转换
                     List<DictModel> dictModels = dictMap.get(key);
-                    dictModels.stream().filter(dict -> dict.getText().equals(value.toString())).findFirst().ifPresent(dict -> {
+                    dictModels.stream().filter(dict -> dict.getLabel().equals(value.toString())).findFirst().ifPresent(dict -> {
                         BeanUtil.setFieldValue(entity, fieldName, dict.getValue());
                     });
                 } else {

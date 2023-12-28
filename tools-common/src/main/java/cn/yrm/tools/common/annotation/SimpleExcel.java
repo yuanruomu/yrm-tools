@@ -20,5 +20,9 @@ public @interface SimpleExcel {
 
     double width() default 15.0;
 
+    double height() default 10.0;
+
     int orderNum() default 0;
+
+    Cell type() default Cell.STRING;
 }

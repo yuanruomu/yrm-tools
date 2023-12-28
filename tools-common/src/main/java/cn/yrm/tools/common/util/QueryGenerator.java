@@ -116,7 +116,7 @@ public class QueryGenerator {
                 String column = orderArr[0];
                 String orderType = orderArr[1];
                 if (CommonConstant.ORDER_ASC.equalsIgnoreCase(orderType) || CommonConstant.ORDER_DESC.equalsIgnoreCase(orderType)) {
-                    orderMap.put(column, CommonConstant.ORDER_ASC);
+                    orderMap.put(column, orderType.toLowerCase());
                 }
             }
         }

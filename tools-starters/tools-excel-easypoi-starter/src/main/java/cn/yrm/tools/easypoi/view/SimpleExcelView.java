@@ -10,6 +10,7 @@ import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.yrm.tools.common.annotation.Cell;
 import cn.yrm.tools.common.annotation.SimpleExcel;
 import cn.yrm.tools.common.service.IDictManager;
 import lombok.extern.slf4j.Slf4j;
@@ -87,8 +88,13 @@ public class SimpleExcelView extends MiniAbstractExcelView {
                         excelExportEntity.setNumFormat(simpleExcel.format());
                     }
                 }
+                excelExportEntity.setType(simpleExcel.type().getValue());
+                if(Cell.IMAGE.equals(simpleExcel.type())){
+                    excelExportEntity.setExportImageType(1);
+                }
                 excelExportEntity.setMethod(PoiReflectorUtil.fromCache(clz).getGetMethod(field.getName()));
                 excelExportEntity.setWidth(simpleExcel.width());
+                excelExportEntity.setHeight(simpleExcel.height());
                 excelExportEntity.setOrderNum(simpleExcel.orderNum());
                 exportEntityList.add(excelExportEntity);
             }

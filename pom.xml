@@ -54,6 +54,7 @@
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
     <modules>
         <module>tools-common</module>
         <module>tools-weixin</module>
@@ -72,7 +73,7 @@
         <mybatis.spring.version>2.0.7</mybatis.spring.version>
         <easypoi.version>4.3.0</easypoi.version>
         <upy.sdk.version>4.0.1</upy.sdk.version>
-        <revision>1.0.2</revision>
+        <revision>1.0.4</revision>
     </properties>
 
     <dependencyManagement>
