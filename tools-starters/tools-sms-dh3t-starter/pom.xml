@@ -6,24 +6,20 @@
 
     <parent>
         <groupId>io.github.yuanruomu</groupId>
-        <artifactId>yrm-tools</artifactId>
+        <artifactId>tools-starters</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>io.github.yuanruomu</groupId>
-    <artifactId>tools-weixin</artifactId>
+    <artifactId>tools-sms-dh3t-starter</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.yuanruomu</groupId>

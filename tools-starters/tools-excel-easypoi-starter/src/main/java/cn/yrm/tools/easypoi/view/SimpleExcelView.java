@@ -89,8 +89,12 @@ public class SimpleExcelView extends MiniAbstractExcelView {
                     }
                 }
                 excelExportEntity.setType(simpleExcel.type().getValue());
-                if(Cell.IMAGE.equals(simpleExcel.type())){
-                    excelExportEntity.setExportImageType(1);
+                if (Cell.IMAGE.equals(simpleExcel.type())) {
+                    if ("byte[]".equals(field.getType().getSimpleName())) {
+                        excelExportEntity.setExportImageType(2);
+                    } else {
+                        excelExportEntity.setExportImageType(1);
+                    }
                 }
                 excelExportEntity.setMethod(PoiReflectorUtil.fromCache(clz).getGetMethod(field.getName()));
                 excelExportEntity.setWidth(simpleExcel.width());
