@@ -20,6 +20,7 @@
         <module>tools-excel-easypoi-starter</module>
         <module>tools-upload-upy-starter</module>
         <module>tools-upload-aliyun-starter</module>
+        <module>tools-upload-minio-starter</module>
         <module>tools-sms-aliyun-starter</module>
         <module>tools-sms-dh3t-starter</module>
     </modules>
