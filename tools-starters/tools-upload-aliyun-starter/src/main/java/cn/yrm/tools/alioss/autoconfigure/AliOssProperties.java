@@ -1,4 +1,4 @@
-package com.yrm.tools.alioss.autoconfigure;
+package cn.yrm.tools.alioss.autoconfigure;
 
 
 import lombok.Getter;

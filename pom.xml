@@ -68,8 +68,10 @@
         <hutool.version>5.8.4</hutool.version>
         <swagger.version>1.5.22</swagger.version>
         <jackson-databind.version>2.9.6</jackson-databind.version>
+        <sa-token.version>1.33.0</sa-token.version>
         <mybatis.plus.version>3.4.3.4</mybatis.plus.version>
         <mybatis.spring.version>2.0.7</mybatis.spring.version>
+        <redisson.version>3.17.3</redisson.version>
         <easypoi.version>4.3.0</easypoi.version>
         <upy.sdk.version>4.0.1</upy.sdk.version>
         <aliyun.sdk.version>4.6.3</aliyun.sdk.version>
@@ -88,6 +90,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- For Auth Start -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-core</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <!-- For Auth End -->
             <!-- For Orm Start -->
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -99,6 +108,18 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis.spring.version}</version>
             </dependency>
+            <!-- For Redisson Start -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <!-- For Redisson End -->
             <!-- For 工具类 Start -->
             <dependency>
                 <groupId>cn.hutool</groupId>

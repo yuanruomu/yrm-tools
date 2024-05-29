@@ -1,6 +1,6 @@
-package com.yrm.tools.alioss.autoconfigure;
+package cn.yrm.tools.alioss.autoconfigure;
 
-import com.yrm.tools.alioss.client.AliOssClient;
+import cn.yrm.tools.alioss.client.AliOssClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -23,5 +23,6 @@
         <module>tools-upload-minio-starter</module>
         <module>tools-sms-aliyun-starter</module>
         <module>tools-sms-dh3t-starter</module>
+        <module>tools-service-common-starter</module>
     </modules>
 </project>
