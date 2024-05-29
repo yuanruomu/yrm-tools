@@ -45,7 +45,7 @@ public class RequestLockAspect {
     /**
      * 切入点
      */
-    @Pointcut("@annotation(cn.yrm.base.common.annotation.RequestLock)")
+    @Pointcut("@annotation(cn.yrm.tools.common.annotation.RequestLock)")
     public void pt() {
     }
 
